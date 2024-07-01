@@ -33,7 +33,7 @@ GET /fetchServersByLocale/:locale
 #### Example
 
 ```sh
-curl http://localhost:3000/fetchServersByLocale/en-US
+curl https://fivem-serverlist-api.onrender.com/fetchServersByLocale/en-US
 ```
 
 ---
@@ -51,7 +51,7 @@ GET /fetchServerByEndPoint/:endpoint
 #### Example
 
 ```sh
-curl http://localhost:3000/fetchServerByEndPoint/3lamjz
+curl https://fivem-serverlist-api.onrender.com/fetchServerByEndPoint/3lamjz
 ```
 
 ---
@@ -65,5 +65,5 @@ GET /fetchServers
 #### Example
 
 ```sh
-curl http://localhost:3000/fetchServers
+curl https://fivem-serverlist-api.onrender.com/fetchServers
 ```
