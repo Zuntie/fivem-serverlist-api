@@ -47,17 +47,25 @@ async function typedArray(ctor, ...args) {
   return new ctor(ab);
 }
 
-async function fetchWithHeaders(...args) {
-  const [resource, config = {}] = args;
+async function fetchWithHeaders(resource, config = {}, retries = 3) {
   const headers = config.headers ? { ...defaultHeaders, ...config.headers } : defaultHeaders;
+  const fetchConfig = { ...config, headers, timeout: 10000 }; // 10 seconds timeout
 
-  const response = await originalFetch(resource, { ...config, headers });
-
-  if (!response.ok) {
-    throw new HttpError(response);
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const response = await originalFetch(resource, fetchConfig);
+      if (!response.ok) {
+        throw new HttpError(response);
+      }
+      return response;
+    } catch (error) {
+      if (attempt === retries) {
+        throw error;
+      }
+      console.log(`Attempt ${attempt} failed, retrying...`);
+      await new Promise(res => setTimeout(res, attempt * 1000)); // Exponential backoff
+    }
   }
-
-  return response;
 }
 
 class HttpError extends Error {
