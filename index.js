@@ -92,7 +92,7 @@ async function finish() {
 // Fetches all servers by locale
 async function fetchServersByLocale(target) {
   const resolved = await Promise.all(Object.values(servers));
-  return resolved.filter(srv => srv.Data.vars.locale === target);
+  return resolved.filter(srv => srv.Data?.vars?.locale?.toLowerCase() === target.toLowerCase());
 }
 
 
