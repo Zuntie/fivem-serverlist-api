@@ -11,6 +11,6 @@
     "body-parser": "^2.2.1",
     "express": "^5.2.1",
     "nodemon": "^3.1.11",
-    "protobufjs": "^7.5.4"
+    "protobufjs": "^8.0.0"
   }
 }
